@@ -1,0 +1,19 @@
+carbonapi_carbonzipper_target: "{{ hostvars['graphite01']['ec2_private_ip_address'] }}:8080"
+carbonapi_listen_address: "{{ hostvars['graphite01']['ec2_private_ip_address'] }}:8082"
+
+carbonapi_carbonzipper_concurrency: 20
+
+carbonapi_cache_type: mem
+carbonapi_cache_size_mb: 0
+
+carbonapi_cpus: 0
+
+carbonapi_sendglobsasis: false
+
+carbonapi_graphite_host: "{{ hostvars['graphite01']['ec2_private_ip_address'] }}:2000"
+carbonapi_report_interval: 60s
+carbonapi_report_prefix: carbon.api
+
+carbonapi_idle_connections: 10
+
+carbonapi_pid_file: /var/run/carbonapi.pid

@@ -1,0 +1,18 @@
+[Unit]
+Description=carbonapi
+Documentation=https://github.com/go-graphite/carbonapi
+
+[Service]
+Type=forking
+PIDFile=/var/run/carbonapi.pid
+Environment=Staging
+ExecStart=/usr/local/bin/carbonapi -config /usr/local/etc/carbonapi.yaml -pidfile /var/run/carbonapi.pid &
+ExecStop=pkill -9 carbonapi
+
+ExecReload=pkill -2 carbonapi
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

@@ -5,10 +5,13 @@
     - '{{ ansible_os_family }}.yml'
     - default.yml
 
+- name: check if go-repo is installed already
+  stat: path=/etc/yum.repos.d/go-repo.repo
+  register: repo_installed
+
 - name: install go-repo gpg key
-  rpm_key:
-    state: present
-    key: https://mirror.go-repo.io/centos/RPM-GPG-KEY-GO-REPO
+  command: rpm --import https://mirror.go-repo.io/centos/RPM-GPG-KEY-GO-REPO
+  when: repo_installed.stat.isreg is defined and repo_installed.stat.isreg
 
 - name: install go-repo
   yum_repository:
